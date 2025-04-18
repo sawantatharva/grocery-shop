@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Admin Dashboard 🔧</h1>
+
+    <h2>Update Quantity</h2>
+    <form method="POST">
+        <label>Product ID: </label>
+        <input type="number" name="id" required>
+        <label>New Quantity: </label>
+        <input type="number" name="quantity" required>
+        <button type="submit">Update</button>
+    </form>
+
+    <h2>All Products</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Qty</th>
+            <th>Expiry</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.expiry }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>⚠️ Expiring Soon (within 5 days)</h2>
+    <ul>
+        {% for item in expiring_soon %}
+        <li>{{ item.name }} - expires on {{ item.expiry }}</li>
+        {% else %}
+        <li>No items expiring soon 🎉</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
